@@ -9,7 +9,7 @@ pipeline{
         }
         stage('Build Docker Image'){
             steps{
-                sh 'docker build -t jithyasasmitha/python_app'
+                sh 'docker build -t jithyasasmitha/python_app .'
             }
         }
         stage('Scan with Trivy'){

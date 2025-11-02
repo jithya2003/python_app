@@ -19,14 +19,20 @@ pipeline{
         }
         stage('Push Image'){
             steps{
-                withCredentials([usernamePassword(credentialsId: 'b07850fd-3aa1-4686-833d-e595b1a7297b', 
-                                                usernameVariable: 'DOCKER_USER', 
+                withCredentials([usernamePassword(credentialsId: 'b07850fd-3aa1-4686-833d-e595b1a7297b',
+                                                usernameVariable: 'DOCKER_USER',
                                                 passwordVariable: 'DOCKER_PASS')]) {
                     sh '''
                         echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
                         docker push jithyasasmitha/python_app:dev
                         '''
                 }
+            }
+        }
+        stage('Verify Kubernetes files') {
+            steps {
+                sh 'pwd'
+                sh 'ls -R'
             }
         }
         stage('Deploy to Kubernetes'){

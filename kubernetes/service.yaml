@@ -1,0 +1,12 @@
+apiVersion: apps
+kind: Service
+metadata:
+  name: python_app
+spec:
+  type: NodePort
+  ports:
+  - port: 5000
+    targetPort: 5000
+    NodePort: 30090
+  selector:
+    app: python_app

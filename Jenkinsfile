@@ -9,7 +9,7 @@ pipeline{
         }
         stage('Build Docker Image'){
             steps{
-                sh 'docker build -t jithyasasmitha/python_app .'
+                sh 'docker build -t jithyasasmitha/python_app:dev .'
             }
         }
         stage('Scan with Trivy'){
@@ -19,7 +19,7 @@ pipeline{
         }
         stage('Push Image'){
             steps{
-                sh 'docker push jithyasasmitha/python_app'
+                sh 'docker push jithyasasmitha/python_app:dev'
             }
         }
         stage('Deploy to Kubernetes'){

@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata: 
-  name: python_app
+  name: python_app:dev
 spec:
   selector:
     matchLabels:
-      app: python_app
+      app: python_app:dev
   replicas: 1
   template:
     metadata:
       labels:
-        app: python_app
+        app: python_app:dev
     spec:
       containers:
-        - name: python_app
-          image: jithyasasmitha/python_app
+        - name: python_app:dev
+          image: jithyasasmitha/python_app:dev
           ports:
             - containerPort: 5000
 

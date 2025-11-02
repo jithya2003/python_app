@@ -1,7 +1,7 @@
 apiVersion: apps
 kind: Service
 metadata:
-  name: python_app
+  name: python_app:dev
 spec:
   type: NodePort
   ports:
@@ -9,4 +9,4 @@ spec:
     targetPort: 5000
     NodePort: 30090
   selector:
-    app: python_app
+    app: python_app:dev

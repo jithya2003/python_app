@@ -9,12 +9,12 @@ pipeline{
         }
         stage('Build Docker Image'){
             steps{
-                sh 'docker build -t jithyasasmitha/python_app'
+                sh 'docker build -t jithyasasmitha/python_app:dev'
             }
         }
         stage('Scan with Trivy'){
             steps{
-                sh 'trivy image --exit-code 1 --severity CRITICAL jithyasasmitha/python_app'
+                sh 'trivy image --exit-code 1 --severity CRITICAL jithyasasmitha/python_app:dev'
             }
         }
         stage('Push Image'){

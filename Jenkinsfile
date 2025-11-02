@@ -9,7 +9,7 @@ pipeline{
         }
         stage('Build Docker Image'){
             steps{
-                sh 'docker build -t jithyasasmitha/python_app:dev .'
+                sh 'docker build -t jithyasasmitha/python_app:dev'
             }
         }
         stage('Scan with Trivy'){
@@ -19,11 +19,14 @@ pipeline{
         }
         stage('Push Image'){
             steps{
-                withCredentials([usernamePassword(credentialsId: 'b07850fd-3aa1-4686-833d-e595b1a7297b', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')])
-                sh '''
-                echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-                docker push jithyasasmitha/python_app:dev
-                '''
+                withCredentials([usernamePassword(credentialsId: 'b07850fd-3aa1-4686-833d-e595b1a7297b', 
+                                                usernameVariable: 'DOCKER_USER', 
+                                                passwordVariable: 'DOCKER_PASS')]) {
+                    sh '''
+                        echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+                        docker push jithyasasmitha/python_app:dev
+                        '''
+                }
             }
         }
         stage('Deploy to Kubernetes'){
